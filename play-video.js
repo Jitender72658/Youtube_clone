@@ -35,9 +35,14 @@ async function loadComments(videoId) {
     const div = document.createElement("div");
     div.className = "comment";
     div.innerHTML = `
-    <img src="${profileUrl}" class="author-profile" alt="author profile" />
-    <b>${authorDisplayName}</b>
-    <p>${textDisplay}</p>`;
+      <div>
+         <img src="${profileUrl}" class="author-profile" alt="author profile" />
+      </div>
+      <div class="sigle-comment-div">
+         <b>${authorDisplayName}</b>
+         <p>${textDisplay}</p>
+         <p> <button><img src="./Images/comment_like_icon.svg"></button>  <button><img src="./Images/dislike_icon.svg" ></button> </p>
+       </div>`;
 
     commentsContainer.appendChild(div);
   });
