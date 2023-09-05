@@ -43,6 +43,7 @@ function renderVideosOntoUI(videosList) {
   videosList.forEach((video) => {
     const videoContainer = document.createElement("div");
     videoContainer.className = "video";
+    console.log(video);
     videoContainer.innerHTML = `<img src="${video.snippet.thumbnails.high.url}" class="thumbnail" alt="thumbnail"/>
                                 <div class="bottom-container">
                                      <div class="logo-container">
@@ -56,6 +57,7 @@ function renderVideosOntoUI(videosList) {
                              </div>`;
 
     videoContainer.addEventListener("click", () => {
+        console.log(video.id);
       navigateToVideoDetails(video.id);
     });
 
@@ -102,11 +104,9 @@ async function getVideoStatistics(videoId) {
 
 async function fetchSearchResults(searchString) {
   // searchString will the input entered by the user
-  let endpoint="";
-  if(searchString.length==0){
-    endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=12git &key=${apiKey}`;
-  }
-  else endpoint = `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=5`;
+ // const endpoint = `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=5`;
+  const endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=12&key=${apiKey}`;
+
   try {
     const response = await fetch(endpoint);
     const result = await response.json();
@@ -125,7 +125,7 @@ async function fetchSearchResults(searchString) {
     alert("Some error occured"+ error);
   }
 }
-fetchSearchResults("");
+fetchSearchResults();
 
 searchButton.addEventListener("click", () => {
   const searchValue = searchInput.value;
