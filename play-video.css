@@ -8,6 +8,10 @@
   .comment {
     box-shadow: 2px 2px 4px rgba(202, 200, 200, 0.531);
     padding: 10px 20px;
+    background-color: black;
+  }
+  .comment *{
+    background-color: black;
   }
   
   .author-profile {

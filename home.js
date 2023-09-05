@@ -43,7 +43,6 @@ function renderVideosOntoUI(videosList) {
   videosList.forEach((video) => {
     const videoContainer = document.createElement("div");
     videoContainer.className = "video";
-    console.log(video);
     videoContainer.innerHTML = `<img src="${video.snippet.thumbnails.high.url}" class="thumbnail" alt="thumbnail"/>
                                 <div class="bottom-container">
                                      <div class="logo-container">
@@ -57,7 +56,6 @@ function renderVideosOntoUI(videosList) {
                              </div>`;
 
     videoContainer.addEventListener("click", () => {
-        console.log(video.id);
       navigateToVideoDetails(video.id);
     });
 
@@ -104,9 +102,11 @@ async function getVideoStatistics(videoId) {
 
 async function fetchSearchResults(searchString) {
   // searchString will the input entered by the user
- // const endpoint = `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=5`;
-  const endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=5&key=${apiKey}`;
-
+  let endpoint="";
+  if(searchString.length==0){
+    endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=12git &key=${apiKey}`;
+  }
+  else endpoint = `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=5`;
   try {
     const response = await fetch(endpoint);
     const result = await response.json();
@@ -125,7 +125,7 @@ async function fetchSearchResults(searchString) {
     alert("Some error occured"+ error);
   }
 }
- fetchSearchResults();
+fetchSearchResults("");
 
 searchButton.addEventListener("click", () => {
   const searchValue = searchInput.value;
@@ -134,49 +134,7 @@ searchButton.addEventListener("click", () => {
 
 
 function navigateToVideoDetails(videoId) {
-    //   document.cookie = `id=${videoId}; path=/play-video.html`;
-    //   window.location.href = "http://127.0.0.1:5500/play-video.html";
-          console.log(mainContainer);
-          mainContainer.innerHTML =`<div class="main-content-div">
-                                             <div class="play-video" id="playVideoContainer></div>
-                                             <div class="comments-container id="commentsContainer"></div>
-                                    </div>`;
-          loadCurrentVideo(videoId);
-    }
-function loadCurrentVideo(videoId){
-    if (YT) {
-      new YT.Player("video-placeholder", {
-        height: "300",
-        width: "500",
-        videoId,
-      });
-    //   loadComments(videoId);
-    }
-  }
-  
-  async function loadComments(videoId) {
-    let endpoint = `${baseUrl}/comments?key=${apiKey}&id=${videoId}&maxResults=10&part=snippet`;
-  
-    const response = await fetch(endpoint);
-    const result = await response.json();
-     console.log(result);
-    result.items.forEach((item) => {
-      const repliesCount = item.snippet.totalReplyCount;
-      const {
-        authorDisplayName,
-        textDisplay,
-        likeCount,
-        authorProfileImageUrl: profileUrl,
-        publishedAt,
-      } = item.snippet.topLevelComment.snippet;
-  
-      const div = document.createElement("div");
-      div.className = "comment";
-      div.innerHTML = `
-      <img src="${profileUrl}" class="author-profile" alt="author profile" />
-      <b>${authorDisplayName}</b>
-      <p>${textDisplay}</p>`;
-      let commentContainer = document.getElementById("commentsContainer");
-      commentsContainer.appendChild(div);
-    });
-  }
+      document.cookie = `id=${videoId}; path=/play-video.html`;
+      window.location.href = "http://127.0.0.1:5500/play-video.html";
+}
+
