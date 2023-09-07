@@ -36,14 +36,13 @@ function calculateTheTimeGap(publishTime) {
   return `${value} years ago`;
 }
 
-let views = "";
 function renderVideosOntoUI(videosList) {
   // videosList will be an array of video objects.
   videosContainer.innerHTML = "";
   videosList.forEach((video) => {
     const videoContainer = document.createElement("div");
     videoContainer.className = "video";
-    console.log(video);
+    const currentVideoViews = calculateViews(video.statistics.viewCount);
     videoContainer.innerHTML = `<img src="${video.snippet.thumbnails.high.url}" class="thumbnail" alt="thumbnail"/>
                                 <div class="bottom-container">
                                      <div class="logo-container">
@@ -52,7 +51,7 @@ function renderVideosOntoUI(videosList) {
                                     <div class="title-container">
                                       <p class="title">${video.snippet.title}</p>
                                       <p class="gray-text">${video.snippet.channelTitle}</p>
-                                      <p class="gray-text">${views} views · ${calculateTheTimeGap(video.snippet.publishedAt)}</p>
+                                      <p class="gray-text">${currentVideoViews} views · ${calculateTheTimeGap(video.snippet.publishedAt)}</p>
                                     </div>
                              </div>`;
 
@@ -65,7 +64,8 @@ function renderVideosOntoUI(videosList) {
   });
 }
 
-async function calculateViews(view){
+function calculateViews(view){
+    console.log("entered function",view);
     let views =  parseInt(view);
     if(views<100){
         return views;
@@ -115,7 +115,6 @@ async function fetchSearchResults(searchString) {
       let channelId = result.items[i].snippet.channelId;
       let statistics = await getVideoStatistics(currentVideoId);
       let channelLogo = await fetchChannelLogo(channelId);
-       views = await calculateViews(statistics.viewCount)
       result.items[i].statistics = statistics;
       result.items[i].channelLogo = channelLogo;
     }
