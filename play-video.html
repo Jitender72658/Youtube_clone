@@ -23,16 +23,27 @@
         </div>
         
         <div class="icons right">
-          <i class="material-icons">videocam</i>
-          <i class="material-icons">apps</i>
-          <i class="material-icons">notifications</i>
-          <i class="material-icons display-this">account_circle</i>
+            <img src="./Images/create_video_icon.svg">
+            <img src ="Images/group_icon.svg">
+            <img src ="Images/bell_icon.svg">
+            <img src ="Images/user_avtar_icon.svg" id="userAvtar">
        </div>
    </header>
-    <div id="video-placeholder"></div>
-
-    <div id="comments-container"></div>
-
+   <main>
+       <div class="leftDiv">
+             <div id="video-placeholder"></div>
+             <div id="videoDetails"> </div>
+             <h3 id="commentsHeading"></h3>
+             <div id="comments-container"></div>
+       </div>
+    
+       <div class="rightDiv" id="recommandationDiv">
+          <div class="topics">
+              <button class="active-topic">All</button>
+              <button id="moreFromChannel"></button>
+          </div>
+       </div>
+    </mainy>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="./play-video.js"></script>
   </body>
