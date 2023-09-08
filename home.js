@@ -133,19 +133,7 @@ searchButton.addEventListener("click", () => {
 
 
 function navigateToVideoDetails(videoId) {
-      deleteCookie('id');
-      document.cookie = `id=${videoId}; path=/play-video.html`;
-      window.location.href = "http://127.0.0.1:5500/play-video.html";
-}
-function deleteCookie(cookieKey) {
-  console.log(cookieKey + " deleted successfully");
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(cookieKey + '=')) {
-      document.cookie = `${cookieKey}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-      return;
-    }
-  }
+   document.cookie = `id=${videoId}; path=/Youtube_clone/play-video.html`;
+   window.location.href = "http://127.0.0.1:5500/Youtube_clone/play-video.html";
 }
 
