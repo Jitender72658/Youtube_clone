@@ -138,6 +138,7 @@ function navigateToVideoDetails(videoId) {
       window.location.href = "http://127.0.0.1:5500/play-video.html";
 }
 function deleteCookie(cookieKey) {
+  console.log(cookieKey + " deleted successfully");
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
