@@ -2,8 +2,8 @@ const apiKey = "AIzaSyCis4vIncfvo4b4usbuvn3gni1gnfIAyeY";
 const url = "https://www.googleapis.com/youtube/v3/commentThreads";
 const commentsContainer = document.getElementById("comments-container");
 window.addEventListener("load",async () => {
-    let videoId = document.cookie.split("=")[1];
-
+  //  let videoId = document.cookie.split("=")[1];
+      const videoId = sessionStorage.getItem('videoId');
   if (YT) {
     new YT.Player("video-placeholder", {
         height: "650px", 
