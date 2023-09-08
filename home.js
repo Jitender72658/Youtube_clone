@@ -56,7 +56,6 @@ function renderVideosOntoUI(videosList) {
                              </div>`;
 
     videoContainer.addEventListener("click", () => {
-        console.log(video.id);
       navigateToVideoDetails(video.id);
     });
 
@@ -65,7 +64,6 @@ function renderVideosOntoUI(videosList) {
 }
 
 function calculateViews(view){
-    console.log("entered function",view);
     let views =  parseInt(view);
     if(views<100){
         return views;
