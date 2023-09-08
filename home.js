@@ -131,7 +131,10 @@ searchButton.addEventListener("click", () => {
 
 
 function navigateToVideoDetails(videoId) {
-      document.cookie = `id=${videoId}; path=/play-video.html`;
-      window.location.href = "http://127.0.0.1:5500/play-video.html";
+   // document.cookie = `id=${videoId}; path=/Youtube_clone/play-video.html`;
+   // window.location.href = "http://127.0.0.1:5500/Youtube_clone/play-video.html";
+     sessionStorage.setItem('videoId', videoId);
+    // Redirect to the new page
+    window.location.href = "play-video.html";
 }
 
